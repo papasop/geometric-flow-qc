@@ -35,3 +35,8 @@ jobs:
         run: |
           python3 -m py_compile shor_order_finding_multinstance_fibre_v0_9_4.py
           python3 -m py_compile shor_order_finding_multinstance_fibre_v0_9_4_r1.py
+      - name: Run read-only disclosure report
+        run: |
+          python3 -m py_compile tools/report_v0_9_4_disclosure.py
+          python3 tools/report_v0_9_4_disclosure.py > /tmp/v094_disclosure.json
+          python3 -m json.tool /tmp/v094_disclosure.json > /dev/null
