@@ -2,6 +2,9 @@ cff-version: 1.2.0
 message: "If you use this frozen audit, please cite this repository version."
 title: "Multi-Instance Shor Task-Fibre Audit"
 version: 0.9.4
+repository-code: "https://github.com/papasop/geometric-flow-qc"
+url: "https://github.com/papasop/geometric-flow-qc"
+license: "BSD-3-Clause"
 authors:
   - family-names: Li
     given-names: Y.Y.N.

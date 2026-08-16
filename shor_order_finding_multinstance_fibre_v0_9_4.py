@@ -4,7 +4,7 @@
 Extends the v0.9.3 N=15,a=2 preflight to a prospectively frozen family of
 six (N,a) order-finding instances.  The optimization rule, hyperparameters,
 response map, tangent projector, noise construction, training/shifted-heldout
-split, and equal objective budget are shared across instances.
+split, and equal composite charged ledger are shared across instances.
 
 Primary comparison: intrinsic exact-fibre ascent versus (i) the unchanged
 reference, (ii) basis-invariant random search on the same fibre, and (iii)
@@ -18,7 +18,7 @@ hardware experiment, fault-tolerance result, cryptographic-scale factoring,
 or asymptotic speedup claim.
 
 Only NumPy is required.  Notebook-injected arguments such as ``-f`` are
-ignored.  Nonzero exit status means a preregistered primary gate failed.
+ignored.  Nonzero exit status means a prospectively frozen primary gate failed.
 """
 from __future__ import annotations
 
@@ -412,6 +412,12 @@ def main() -> int:
                 "intrinsic_budget": li.total,
                 "random_budget": lr.total,
                 "spsa_budget": ls.total,
+                "intrinsic_task_calls": li.task_calls,
+                "intrinsic_response_calls": li.response_calls,
+                "random_task_calls": lr.task_calls,
+                "random_response_calls": lr.response_calls,
+                "spsa_task_calls": ls.task_calls,
+                "spsa_response_calls": ls.response_calls,
                 "intrinsic_response_residual": float(np.linalg.norm(response(ti))),
                 "random_normal_component": float(np.linalg.norm(P_N @ tr)),
                 "intrinsic_ideal_multiplier_change": float(
@@ -530,7 +536,7 @@ def main() -> int:
             "meta_seeds_per_instance": args.meta_seeds,
             "train_seeds_per_meta": args.train_per_meta,
             "shifted_heldout_seeds_per_meta": args.heldout_per_meta,
-            "equal_budget_per_method_per_meta": args.budget,
+            "equal_composite_charged_ledger_per_method_per_meta": args.budget,
             "bootstrap_draws": args.bootstrap,
             "random_sampling":
                 "v~N(0,I9); theta=r P_Tv/||P_Tv||; r=1.6u^(1/4)",
