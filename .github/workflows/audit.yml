@@ -24,7 +24,7 @@ jobs:
       - name: Verify repository manifest
         run: sha256sum -c SHA256SUMS
       - name: Verify manuscript manifest
-        run: sha256sum -c SHA256SUMS_MANUSCRIPT_v0.9.4-r2.txt
+        run: sha256sum -c SHA256SUMS_MANUSCRIPT_v0.9.4-m3.txt
       - name: Verify frozen artifacts
         run: python tools/verify_frozen_v0_9_4.py
       - name: Run read-only disclosure report

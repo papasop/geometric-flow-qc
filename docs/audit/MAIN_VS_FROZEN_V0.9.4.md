@@ -9,23 +9,31 @@ Frozen tag: `shor-multinstance-fibre-v0.9.4`
 
 Frozen commit: `24da8d7ea9dddb702eb07de4b567bf5637f01e51`
 
+## Resolution Status
+
+Resolved on `main` by commit
+`41a1411608463bfaa0a4efc94a3d8b49176da11e`.
+
+The four canonical v0.9.4 computational artifacts now match the frozen tag
+exactly. The remainder of this document records the pre-restoration state.
+
 ## Summary
 
-The current `main` branch contains four files still named and presented as
-v0.9.4 frozen computational artifacts, but their bytes differ from the frozen
-tag. The deviation was introduced by commit
+Before restoration, the `main` branch contained four files still named and
+presented as v0.9.4 frozen computational artifacts, but their bytes differed
+from the frozen tag. The deviation was introduced by commit
 `848025bea840eac993ad15989a31a095cc02beb8`
 (`Address Shor audit release and ledger fixes`).
 
-The changes are later disclosure/schema edits and regenerated output occupying
-the original v0.9.4 artifact filenames. They are not a separately named
+The changes were later disclosure/schema edits and regenerated output occupying
+the original v0.9.4 artifact filenames. They were not a separately named
 v0.9.5 experiment, do not introduce new optimizer logic intended to be retained
 as an independent computation version, and should not continue to occupy the
 v0.9.4 frozen artifact paths.
 
-Restoring the four files from `shor-multinstance-fibre-v0.9.4` does not discard
+Restoring the four files from `shor-multinstance-fibre-v0.9.4` did not discard
 independent versioned work: the useful disclosure content is represented in
-README/docs/tools on this branch, while the v0.9.4 frozen artifact paths return
+README/docs/tools on this branch, while the v0.9.4 frozen artifact paths returned
 to their archived tag bytes.
 
 ## File-Level Differences

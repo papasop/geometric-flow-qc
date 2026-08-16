@@ -37,6 +37,20 @@ The v0.9.4 computational protocol, driver, records, and numerical outputs are
 frozen and unchanged. Subsequent manuscript revisions affect exposition,
 disclosure, tables, and literature positioning only.
 
+## Manuscript
+
+The accompanying manuscript is:
+
+**Navigating Exact-Response Fibres in Shor Order Finding**
+
+The current manuscript-only revision is `v0.9.4-m3`:
+
+- `paper/manuscript/shor-exact-response-fibre-v0.9.4-m3.pdf`
+
+The computational protocol remains `v0.9.4`. Revision `m3` changes exposition,
+methodological disclosure, statistical interpretation, literature positioning,
+and presentation only. It does not modify or rerun the frozen computation.
+
 ## Response Matrix
 
 The declared response matrix has rank five and a four-dimensional kernel. Its
@@ -96,9 +110,9 @@ sha256sum -c SHA256SUMS
 
 Within the declared shared synthetic model family, intrinsic Euclidean ascent
 along a four-dimensional exact ideal-response fibre has positive mean advantage
-over the unchanged reference, equal-budget basis-invariant random search, and
-equal-budget SPSA on every frozen instance. All three equal-instance-weight
-hierarchical bootstrap intervals are strictly positive.
+over the unchanged reference, basis-invariant random search and SPSA under the
+same 5,520-unit composite ledger on every frozen instance. All three
+equal-instance-weight hierarchical bootstrap intervals are strictly positive.
 
 No claim is made about native compiled circuits, hardware advantage,
 fault-tolerant resources, factoring complexity, or scalability.
