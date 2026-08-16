@@ -1,7 +1,14 @@
 # Multi-Instance Shor Task-Fibre Audit v0.9.4
 
-This repository freezes a prospective multi-instance numerical audit of
-intrinsic response-fibre navigation at the Shor order-finding task level.
+This repository contains frozen computational artifacts for a synthetic
+six-instance Shor order-finding study. Within the declared ansatz, the
+optimizing methods remain on a four-dimensional exact-response fibre that
+preserves the ideal modular multiplier, while finite-noise exact-order recovery
+remains implementation-dependent through the stipulated synthetic noise map.
+
+The study tests whether this stipulated task dependence is navigable and
+transfers to shifted held-out noise seeds. It does not test whether the same
+separation arises in native circuits or hardware.
 
 ## Frozen scope
 
@@ -12,15 +19,33 @@ intrinsic response-fibre navigation at the Shor order-finding task level.
 - Implementation: shared synthetic nine-parameter ansatz
 - Declared response: rank five; exact fibre dimension four
 - Noise: frozen synthetic coherent/dephasing laws with a shifted held-out law
+- Optimization: discrete intrinsic finite-difference ascent, not a continuous
+  certified ODE
 - Repetitions: 12 meta-seeds per instance, 72 records in total
 - Training/held-out split: 5 training and 8 shifted held-out seeds per record
 - Comparators: unchanged reference, basis-invariant random search, and SPSA
-- Budget: exactly 5,520 composite charged ledger units per method per record
+- Budget: exactly 5,520 charged units per method per record
 - Inference: equal-instance-weight hierarchical paired bootstrap
 
-This is not a native-gate hardware experiment, a fault-tolerance result, a
-cryptographic-scale factorization, a universal Shor optimizer, or evidence of
-asymptotic speedup.
+This is not a native compiled circuit study, a hardware experiment, a
+fault-tolerance result, a cryptographic-scale result, a universal optimizer
+claim, or evidence of asymptotic Shor advantage.
+
+## Frozen status
+
+The v0.9.4 computational protocol, driver, records, and numerical outputs are
+frozen and unchanged. Subsequent manuscript revisions affect exposition,
+disclosure, tables, and literature positioning only.
+
+## Response Matrix
+
+The declared response matrix has rank five and a four-dimensional kernel. Its
+sixth row is the sum of rows 1, 2, 3, and 5 and is retained as an explicit
+consistency/audit coordinate:
+
+```text
+r_6 = r_1 + r_2 + r_3 + r_5
+```
 
 ## Frozen primary result
 
@@ -30,9 +55,9 @@ asymptotic speedup.
 | intrinsic vs random | 0.000341155 | [0.000235212, 0.000455025] | 68/72 | 6/6 |
 | intrinsic vs SPSA | 0.000120071 | [0.0000599292, 0.000193319] | 72/72 | 6/6 |
 
-All prospectively frozen primary checks pass. The maximum three-way composite
-charged ledger gap is zero, the maximum intrinsic response residual is
-`2.66e-16`, and the maximum ideal-multiplier change is `4.79e-16`.
+All prospectively frozen primary checks pass. The maximum three-way charged
+budget gap is zero, the maximum intrinsic response residual is `2.66e-16`, and
+the maximum ideal-multiplier change is `4.79e-16`.
 
 The protocol and driver were frozen locally before the full run and archived
 publicly together with the resulting records. This was not a registry-based
@@ -71,9 +96,9 @@ sha256sum -c SHA256SUMS
 
 Within the declared shared synthetic model family, intrinsic Euclidean ascent
 along a four-dimensional exact ideal-response fibre has positive mean advantage
-over the unchanged reference, equal-composite-ledger basis-invariant random
-search, and equal-composite-ledger SPSA on every frozen instance. All three
-equal-instance-weight hierarchical bootstrap intervals are strictly positive.
+over the unchanged reference, equal-budget basis-invariant random search, and
+equal-budget SPSA on every frozen instance. All three equal-instance-weight
+hierarchical bootstrap intervals are strictly positive.
 
 No claim is made about native compiled circuits, hardware advantage,
 fault-tolerant resources, factoring complexity, or scalability.

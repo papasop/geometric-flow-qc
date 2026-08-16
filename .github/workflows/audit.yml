@@ -17,26 +17,17 @@ jobs:
         run: python -m pip install -r requirements.txt
       - name: Compile driver
         run: python -m py_compile shor_order_finding_multinstance_fibre_v0_9_4.py
-      - name: Verify frozen manifest
-        run: sha256sum -c SHA256SUMS
-      - name: Smoke audit
+      - name: Compile disclosure tools
         run: |
-          set +e
-          python shor_order_finding_multinstance_fibre_v0_9_4.py \
-            --instances 15:2 \
-            --meta-seeds 1 \
-            --bootstrap 100 \
-            --json-out /tmp/shor_smoke_result.json
-          code=$?
-          set -e
-          test "$code" -eq 2
-          python - <<'PY'
-          import json
-          with open("/tmp/shor_smoke_result.json", encoding="utf-8") as f:
-              result = json.load(f)
-          row = result["records"][0]
-          assert row["intrinsic_task_calls"] == 5500
-          assert row["intrinsic_response_calls"] == 20
-          assert row["random_task_calls"] == 5520
-          assert row["spsa_task_calls"] == 5520
-          PY
+          python -m py_compile tools/report_v0_9_4_disclosure.py
+          python -m py_compile tools/verify_frozen_v0_9_4.py
+      - name: Verify repository manifest
+        run: sha256sum -c SHA256SUMS
+      - name: Verify manuscript manifest
+        run: sha256sum -c SHA256SUMS_MANUSCRIPT_v0.9.4-r2.txt
+      - name: Verify frozen artifacts
+        run: python tools/verify_frozen_v0_9_4.py
+      - name: Run read-only disclosure report
+        run: |
+          python tools/report_v0_9_4_disclosure.py > /tmp/v094_disclosure.json
+          python -m json.tool /tmp/v094_disclosure.json > /dev/null
