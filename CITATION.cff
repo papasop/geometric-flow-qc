@@ -14,3 +14,10 @@ abstract: >-
   A frozen prospective six-instance numerical audit of intrinsic exact-response
   fibre navigation for small Shor order-finding tasks under a shared synthetic
   coherent/dephasing noise family.
+preferred-citation:
+  type: article
+  title: "Navigating Exact-Response Fibres in Shor Order Finding"
+  authors:
+    - family-names: Li
+      given-names: Y.Y.N.
+  year: 2026

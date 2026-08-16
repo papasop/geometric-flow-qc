@@ -37,6 +37,28 @@ The v0.9.4 computational protocol, driver, records, and numerical outputs are
 frozen and unchanged. Subsequent manuscript revisions affect exposition,
 disclosure, tables, and literature positioning only.
 
+## Manuscript
+
+The accompanying manuscript is:
+
+**Navigating Exact-Response Fibres in Shor Order Finding**
+
+The current manuscript-only revision is `v0.9.4-m3`:
+
+- `paper/manuscript/shor-exact-response-fibre-v0.9.4-manuscript-m3.pdf`
+
+PDF SHA-256:
+
+```text
+a258dc5f0ad8b7103794d7af5b8c98d8c56f5e7131eccf1dddc6aad51273913f
+```
+
+The computational protocol remains `v0.9.4`. Revision `m3` changes exposition,
+methodological disclosure, statistical interpretation, literature positioning,
+and presentation only. It does not modify or rerun the frozen computation.
+
+Frozen computational tag: `shor-multinstance-fibre-v0.9.4`
+
 ## Response Matrix
 
 The declared response matrix has rank five and a four-dimensional kernel. Its
@@ -80,6 +102,8 @@ Verify deposited files with:
 
 ```bash
 sha256sum -c SHA256SUMS
+sha256sum -c SHA256SUMS_MANUSCRIPT_v0.9.4-m3.txt
+python tools/verify_frozen_v0_9_4.py
 ```
 
 ## Files
@@ -96,9 +120,12 @@ sha256sum -c SHA256SUMS
 
 Within the declared shared synthetic model family, intrinsic Euclidean ascent
 along a four-dimensional exact ideal-response fibre has positive mean advantage
-over the unchanged reference, equal-budget basis-invariant random search, and
-equal-budget SPSA on every frozen instance. All three equal-instance-weight
-hierarchical bootstrap intervals are strictly positive.
+over the unchanged reference, basis-invariant random search and SPSA under the
+same 5,520-unit composite ledger on every frozen instance. All methods are
+compared under an equal composite response-call ledger of 5,520 calls per
+record. The intrinsic method uses 5,500 task calls plus 20 padding calls,
+whereas the random and SPSA baselines use 5,520 task calls. All three
+equal-instance-weight hierarchical bootstrap intervals are strictly positive.
 
 No claim is made about native compiled circuits, hardware advantage,
 fault-tolerant resources, factoring complexity, or scalability.

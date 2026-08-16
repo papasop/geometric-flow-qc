@@ -1,0 +1,3 @@
+a258dc5f0ad8b7103794d7af5b8c98d8c56f5e7131eccf1dddc6aad51273913f  paper/manuscript/shor-exact-response-fibre-v0.9.4-manuscript-m3.pdf
+835acd6d3ec0d2980b3e916d74e33116874b37e09ea7627cc839c2316f8bf23e  paper/manuscript/README_BUILD.md
+772edaf19d97c99b4720dc206330d7619a2ec54f7f07dfaf58a55e7852a7a1ae  paper/manuscript/SOURCE_MANIFEST.md
