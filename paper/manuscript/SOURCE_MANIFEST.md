@@ -1,8 +1,8 @@
 # Source Manifest
 
-- `shor-exact-response-fibre-v0.9.4-m3.pdf`: authoritative manuscript PDF for
-  `Navigating Exact-Response Fibres in Shor Order Finding`, manuscript-only
-  revision `v0.9.4-m3`.
+- `shor-exact-response-fibre-v0.9.4-manuscript-m3.pdf`: authoritative
+  manuscript PDF for `Navigating Exact-Response Fibres in Shor Order Finding`,
+  manuscript-only revision `v0.9.4-m3`.
 - `README_BUILD.md`: notes for the manuscript artifact.
 - `SOURCE_MANIFEST.md`: this manifest.
 

@@ -3,7 +3,7 @@
 The authoritative manuscript artifact for revision `v0.9.4-m3` is:
 
 ```text
-shor-exact-response-fibre-v0.9.4-m3.pdf
+shor-exact-response-fibre-v0.9.4-manuscript-m3.pdf
 ```
 
 The computational protocol remains `v0.9.4`. This manuscript-only revision

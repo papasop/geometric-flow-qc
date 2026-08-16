@@ -26,9 +26,9 @@ from the frozen tag. The deviation was introduced by commit
 (`Address Shor audit release and ledger fixes`).
 
 The changes were later disclosure/schema edits and regenerated output occupying
-the original v0.9.4 artifact filenames. They were not a separately named
-v0.9.5 experiment, do not introduce new optimizer logic intended to be retained
-as an independent computation version, and should not continue to occupy the
+the original v0.9.4 artifact filenames. They were not a separately named later
+experiment, did not introduce new optimizer logic intended to be retained as an
+independent computation version, and should not have continued to occupy the
 v0.9.4 frozen artifact paths.
 
 Restoring the four files from `shor-multinstance-fibre-v0.9.4` did not discard

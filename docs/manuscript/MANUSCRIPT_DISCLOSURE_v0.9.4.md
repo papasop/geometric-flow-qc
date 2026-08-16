@@ -13,7 +13,7 @@ Frozen commit: `24da8d7ea9dddb702eb07de4b567bf5637f01e51`
 Manuscript revision: `v0.9.4-m3`
 
 Canonical manuscript:
-`paper/manuscript/shor-exact-response-fibre-v0.9.4-m3.pdf`
+`paper/manuscript/shor-exact-response-fibre-v0.9.4-manuscript-m3.pdf`
 
 This manuscript revision is distinct from computational protocol version
 `v0.9.4` and changes exposition and disclosure only.
