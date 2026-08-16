@@ -1,0 +1,102 @@
+{
+  "version": "0.9.4-r1",
+  "computational_protocol": "v0.9.4-r1 reproducibility correction",
+  "base_protocol": "v0.9.4",
+  "unchanged_from_v0_9_4": [
+    "instances",
+    "seed hierarchy",
+    "objective",
+    "budget",
+    "bootstrap",
+    "success criterion",
+    "primary gates",
+    "reference method",
+    "intrinsic method",
+    "basis-invariant random method"
+  ],
+  "corrective_change": "Pins the tangent coordinate basis used by SPSA to an explicit analytic 9x4 basis.",
+  "protocol": {
+    "instances": [
+      {
+        "N": 15,
+        "a": 2,
+        "order": 4,
+        "control_qubits": 4
+      },
+      {
+        "N": 15,
+        "a": 7,
+        "order": 4,
+        "control_qubits": 4
+      },
+      {
+        "N": 21,
+        "a": 2,
+        "order": 6,
+        "control_qubits": 7
+      },
+      {
+        "N": 21,
+        "a": 5,
+        "order": 6,
+        "control_qubits": 7
+      },
+      {
+        "N": 33,
+        "a": 2,
+        "order": 10,
+        "control_qubits": 7
+      },
+      {
+        "N": 35,
+        "a": 2,
+        "order": 12,
+        "control_qubits": 8
+      }
+    ],
+    "frozen_default_instances": [
+      [
+        15,
+        2
+      ],
+      [
+        15,
+        7
+      ],
+      [
+        21,
+        2
+      ],
+      [
+        21,
+        5
+      ],
+      [
+        33,
+        2
+      ],
+      [
+        35,
+        2
+      ]
+    ],
+    "meta_seeds_per_instance": 12,
+    "train_seeds_per_meta": 5,
+    "shifted_heldout_seeds_per_meta": 8,
+    "equal_budget_per_method_per_meta": 5520,
+    "bootstrap_draws": 10000,
+    "random_sampling": "v~N(0,I9); theta=r P_Tv/||P_Tv||; r=1.6u^(1/4)",
+    "aggregate_inference": "paired hierarchical bootstrap; equal instance weight; resample instances then meta-repetitions",
+    "primary_methods": [
+      "intrinsic",
+      "basis_invariant_random",
+      "SPSA"
+    ]
+  },
+  "basis_sha256": "03236c148c7dc761344d9bed57d907e1494cd9ce0b4e7c9e6d043d12d257b224",
+  "original_driver": "shor_order_finding_multinstance_fibre_v0_9_4.py",
+  "original_driver_sha256": "b005753cb4780f1d1aee2da463abb2f61785ba5d27bf0ddc6d9db3e97bd43aac",
+  "corrective_driver": "shor_order_finding_multinstance_fibre_v0_9_4_r1.py",
+  "corrective_driver_sha256_before_output_write": "086d4c89bbb30e0e9a75372fe1e32ab8130e9a25a930c35a378a6aeffa493dac",
+  "spsa_notice": "The r1 SPSA values are corrective-run values under an explicitly pinned analytic tangent basis. They are not a bitwise reproduction of the original v0.9.4 SPSA values, because the original tangent coordinate basis was not deposited."
+}
