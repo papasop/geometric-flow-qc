@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+message: "If you use this frozen preflight, please cite this repository version."
+title: "Intrinsic Shor Task-Fibre Preflight"
+version: 0.9.3
+authors:
+  - family-names: Li
+    given-names: Y.Y.N.
+date-released: 2026-08-16
+type: software
+abstract: >-
+  A frozen prospective numerical audit of intrinsic response-fibre optimization
+  for an N=15, a=2 Shor order-finding task under synthetic coherent and
+  dephasing noise.

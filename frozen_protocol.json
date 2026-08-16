@@ -1,0 +1,30 @@
+{
+  "version": "0.9.3",
+  "status": "INTRINSIC_SHOR_TASK_FIBRE_ADVANTAGE_FREEZE_CANDIDATE",
+  "instance": {
+    "N": 15,
+    "a": 2,
+    "exact_order": 4,
+    "control_qubits": 4,
+    "success_bins": [4, 12],
+    "ideal_exact_order_probability": 0.5
+  },
+  "evaluation": {
+    "meta_seeds": 12,
+    "train_per_meta": 5,
+    "shifted_heldout_per_meta": 8,
+    "flow_steps": 60,
+    "landscape_samples": 256,
+    "bootstrap_draws": 10000,
+    "equal_budget_objective_evaluations_per_method": 5520
+  },
+  "random_comparator": "v~N(0,I9); theta=r P_T v/||P_T v||; r=1.6 u^(1/4)",
+  "online_normal_recovery": "theta <- theta-beta J^dagger R(theta) after every drifted tangent step",
+  "primary_comparators": [
+    "unchanged_reference",
+    "basis_invariant_random_search",
+    "SPSA"
+  ],
+  "primary_gate": "all preregistered primary checks must pass",
+  "boundary": "Exact state-vector N=15,a=2 order-finding model with frozen synthetic coherent/dephasing noise; not native-gate hardware, fault tolerance, cryptographic scale, or asymptotic speedup."
+}
