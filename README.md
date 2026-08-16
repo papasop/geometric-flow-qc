@@ -37,6 +37,33 @@ The v0.9.4 computational protocol, driver, records, and numerical outputs are
 frozen and unchanged. Subsequent manuscript revisions affect exposition,
 disclosure, tables, and literature positioning only.
 
+## Reproducibility Correction
+
+Computational protocol `v0.9.4-r1` is a reproducibility correction for the
+SPSA coordinate basis. The original v0.9.4 tangent subspace was correct, but
+the concrete orthonormal basis inside the four-dimensional degenerate
+eigenspace was not deposited. SPSA uses coordinate Rademacher perturbations, so
+that coordinate basis is part of the reproducible protocol.
+
+The r1 corrective driver pins the analytic tangent basis archived in
+`T_BASIS_v0.9.4-r1.json`, preserves the v0.9.4 instance family, seed hierarchy,
+objective, budget, bootstrap rule, and primary gates, and deposits a full
+72-record corrective result in
+`shor_multinstance_fibre_v0_9_4_r1_result.json`.
+
+Intrinsic finite-difference ascent is equivariant under orthogonal rotations
+of the tangent basis used to represent the same fibre. The random comparator
+uses the tangent projection operator and is therefore basis-invariant. SPSA is
+different: its Rademacher coordinate perturbations depend on the concrete
+orthonormal coordinate basis, so that basis is part of the reproducible SPSA
+protocol.
+
+The r1 SPSA values are corrective-run values under the explicitly pinned
+analytic basis. They are not a bitwise reproduction of the original v0.9.4
+SPSA values, because the original tangent coordinate basis was not deposited.
+All primary gates continue to pass and the main conclusion direction is
+unchanged.
+
 ## Manuscript
 
 The accompanying manuscript is:
@@ -59,6 +86,35 @@ and presentation only. It does not modify or rerun the frozen computation.
 
 Frozen computational tag: `shor-multinstance-fibre-v0.9.4`
 
+The editable m3 source is unavailable. A reconstructed manuscript source for
+`v0.9.4-m4` is deposited at
+`docs/manuscript/reconstructed-v0.9.4-m4/`. It was reconstructed from the m3
+PDF and then revised against the v0.9.4-r1 corrective result; it is not the
+recovered original m3 source. See `MANUSCRIPT_PROVENANCE.md` and
+`MANUSCRIPT_M4_BLOCKERS.md`.
+
+The externally compiled reconstructed m4 PDF is:
+
+- `paper/manuscript/shor-exact-response-fibre-v0.9.4-manuscript-m4-reconstructed.pdf`
+
+PDF SHA-256:
+
+```text
+d44dcd4f7ad858d3447fd8d9af2d2e21b4bde8f941c3c2a1f1d4f387773c7ef4
+```
+
+The external handoff audit reports a clean 5-page build and visual inspection.
+This artifact is a reconstructed corrective/review manuscript, not a complete
+source-equivalent reproduction of the 9-page m3 PDF, and must not be marked as
+the final submission replacement without later authorization.
+
+```text
+RECONSTRUCTED SOURCE
+NOT RECOVERED ORIGINAL M3 SOURCE
+NOT A COMPLETE SOURCE-EQUIVALENT REPRODUCTION OF M3
+NOT THE CURRENT SUBMISSION MANUSCRIPT
+```
+
 ## Response Matrix
 
 The declared response matrix has rank five and a four-dimensional kernel. Its
@@ -75,11 +131,12 @@ r_6 = r_1 + r_2 + r_3 + r_5
 |---|---:|---:|---:|---:|
 | intrinsic vs reference | 0.000493796 | [0.000290298, 0.000682212] | 72/72 | 6/6 |
 | intrinsic vs random | 0.000341155 | [0.000235212, 0.000455025] | 68/72 | 6/6 |
-| intrinsic vs SPSA | 0.000120071 | [0.0000599292, 0.000193319] | 72/72 | 6/6 |
+| intrinsic vs SPSA | 0.000122796 | [0.0000599637, 0.000200926] | 72/72 | 6/6 |
 
 All prospectively frozen primary checks pass. The maximum three-way charged
-budget gap is zero, the maximum intrinsic response residual is `2.66e-16`, and
-the maximum ideal-multiplier change is `4.79e-16`.
+budget gap is zero, the maximum intrinsic response residual is
+`5.30e-17`, and the maximum ideal-multiplier change is `7.85e-17` in the r1
+corrective archive.
 
 The protocol and driver were frozen locally before the full run and archived
 publicly together with the resulting records. This was not a registry-based
@@ -104,6 +161,8 @@ Verify deposited files with:
 sha256sum -c SHA256SUMS
 sha256sum -c SHA256SUMS_MANUSCRIPT_v0.9.4-m3.txt
 python tools/verify_frozen_v0_9_4.py
+python tools/verify_r1_reproducibility.py
+python tools/verify_m4_manuscript_numbers.py
 ```
 
 ## Files
@@ -115,6 +174,8 @@ python tools/verify_frozen_v0_9_4.py
 - `requirements.txt`: minimal dependency pin
 - `CITATION.cff`: citation metadata
 - `SHA256SUMS`: integrity manifest
+- `docs/manuscript/reconstructed-v0.9.4-m4/`: reconstructed m4 manuscript
+  source, not recovered original m3 source
 
 ## Supported statement
 

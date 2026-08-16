@@ -1,0 +1,337 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{longtable}
+\usepackage{xurl}
+\hypersetup{
+  pdftitle={Navigating Exact-Response Fibres in Shor Order Finding},
+  pdfauthor={Y. Y. N. Li},
+  hidelinks
+}
+
+\title{Navigating Exact-Response Fibres in Shor Order Finding\\
+\large Reconstructed manuscript source, revision v0.9.4-m4}
+\author{Y. Y. N. Li\\Independent Researcher}
+\date{Reconstructed source prepared from archived v0.9.4-m3 PDF and revised against v0.9.4-r1 corrective results}
+
+\begin{document}
+\maketitle
+
+\begin{center}
+\fbox{\parbox{0.92\linewidth}{
+\textbf{Source provenance.}
+The editable source of manuscript revision v0.9.4-m3 was unavailable.
+The v0.9.4-m4 LaTeX source was reconstructed from the archived m3 PDF
+and then revised against the frozen v0.9.4-r1 corrective result.
+It must not be interpreted as the recovered original m3 source.
+}}
+\end{center}
+
+\begin{abstract}
+We study a synthetic, exact state-vector model of Shor order finding in which
+the ideal phase-estimation response is held fixed while implementation-noise
+coordinates are varied along a four-dimensional exact-response fibre.  On a
+frozen six-instance benchmark with 72 meta-records, intrinsic Euclidean ascent
+on this fibre improves held-out exact-order recovery relative to the unchanged
+reference, a basis-invariant random tangent comparator, and an SPSA comparator
+run under the same composite response-call ledger.  In the v0.9.4-r1
+corrective archive, the equal-instance mean gains are
+$4.937962211018602\times 10^{-4}$ over reference,
+$3.411545293638851\times 10^{-4}$ over random search, and
+$1.2279600467454457\times 10^{-4}$ over SPSA, with paired hierarchical
+bootstrap 95\% confidence intervals. In comparator order (reference, random,
+SPSA), these are
+\begin{gather*}
+[2.902978897001541\times 10^{-4},\,6.822119290361299\times 10^{-4}],\\
+[2.3521176375243113\times 10^{-4},\,4.5502493973362636\times 10^{-4}],\\
+[5.996365059637254\times 10^{-5},\,2.0092595128065157\times 10^{-4}].
+\end{gather*}
+The intrinsic method beats SPSA on 72/72 records and has positive
+instance-level means on 6/6 instances; it beats the random comparator on 68/72
+records and has positive instance-level means on 6/6 instances.  These results
+support navigability of the stipulated fibre under the declared synthetic
+noise family only.  They are not evidence of a native hardware advantage,
+fault-tolerant resource reduction, cryptographic-scale factoring, practical
+computational advantage, or an asymptotic improvement to Shor's algorithm.
+\end{abstract}
+
+\section{Introduction}
+
+Shor order finding reduces factoring to estimating the period of modular
+exponentiation.  In the ideal algorithm, the relevant response is the
+phase-estimation distribution induced by an order $r$ and a control register
+of size $M=2^m$.  Practical implementations, however, introduce coherent and
+stochastic distortions before the exact-order decision rule is applied.  The
+question addressed here is narrow: within a declared non-native synthetic
+noise ansatz, can one move in directions that preserve the ideal response while
+improving the held-out exact-order recovery probability?
+
+The experiment studies exact-response fibres rather than new asymptotic
+algorithms.  A fibre is the set of parameter perturbations that leave the
+declared ideal response invariant to first order.  The intrinsic method moves
+inside a four-dimensional tangent fibre and optimizes the held-out task
+objective.  The frozen benchmark compares it with an unchanged reference,
+basis-invariant random tangent search, and SPSA.  Revision v0.9.4-r1 is a
+reproducibility correction: it pins the analytic tangent-coordinate basis used
+by SPSA.  The original v0.9.4 tangent subspace was correct, but the concrete
+coordinate basis used inside the degenerate four-dimensional subspace was not
+archived; this matters for coordinate Rademacher perturbations.
+
+\section{Model And Exact-Response Fibre}
+
+\subsection{Phase-Estimation Response}
+
+For an instance $(N,a)$ with multiplicative order $r$, the ideal
+phase-estimation amplitudes are indexed by a control-register outcome
+$y\in\{0,\ldots,M-1\}$ and by an eigensector $s$.  The reconstructed formula
+uses the normalization implemented by the archive:
+\begin{equation}
+A_s(y;\theta,\xi)
+= \frac{1}{M}\sum_{x=0}^{M-1}
+\exp\left[
+2\pi i x\left(\frac{s}{r}-\frac{y}{M}\right)
++ i\phi_x(\theta,\xi)
+\right].
+\end{equation}
+The exact-order success probability is obtained by summing the probabilities
+of outcomes whose continued-fraction post-processing recovers the exact
+order.  The code retains final normalization as numerical insurance, not as a
+mathematical correction to the amplitude definition.
+
+\subsection{Synthetic Implementation Ansatz}
+
+The archive uses a shared nine-parameter synthetic implementation/noise
+ansatz.  Its declared response matrix has rank five and a four-dimensional
+kernel.  The sixth response coordinate is an explicit consistency coordinate,
+\begin{equation}
+r_6 = r_1 + r_2 + r_3 + r_5 .
+\end{equation}
+Consequently, the tangent subspace has dimension four.  This subspace is the
+object preserved by the original v0.9.4 archive.
+
+\subsection{Pinned Analytic Tangent Basis}
+
+The corrective r1 archive makes the SPSA coordinate convention explicit.  The
+tangent basis is fixed to the following orthonormal columns in
+$\mathbb{R}^9$:
+\begin{align}
+t_1 &= (e_0+e_3)/\sqrt{2},\\
+t_2 &= (e_1-e_5)/\sqrt{2},\\
+t_3 &= (e_1+e_5-2e_6)/\sqrt{6},\\
+t_4 &= (e_2-e_8)/\sqrt{2}.
+\end{align}
+The deposited basis hash is
+\nolinkurl{03236c148c7dc761344d9bed57d907e1494cd9ce0b4e7c9e6d043d12d257b224}.
+The archived residuals are $2.4655887277772096\times10^{-16}$ for the Gram
+check, $0$ for the response check, and
+$3.895959316580178\times10^{-16}$ for the projector check.
+
+\section{Protocol}
+
+The frozen instance family is
+$(15,2)$, $(15,7)$, $(21,2)$, $(21,5)$, $(33,2)$, and $(35,2)$, with exact
+orders $4$, $4$, $6$, $6$, $10$, and $12$.  Each instance has 12 meta-seeds.
+Each record uses five training seeds and eight shifted held-out seeds.  The
+primary statistic is the equal-instance-weight mean held-out gain, with paired
+hierarchical bootstrap intervals obtained by resampling instances and then
+meta-records.  All methods are compared under an equal composite response-call
+ledger of 5520 calls per record.  The intrinsic method uses 5500 task calls
+plus 20 padding calls, whereas the random and SPSA baselines use 5520 task
+calls.
+
+\begin{table}[h]
+\centering
+\caption{Composite ledger per record.}
+\begin{tabular}{lrrr}
+\toprule
+Method & Task calls & Response/padding calls & Composite total\\
+\midrule
+Intrinsic & 5500 & 20 & 5520\\
+Random & 5520 & 0 & 5520\\
+SPSA & 5520 & 0 & 5520\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Primary Results}
+
+Table~\ref{tab:aggregate} reports the r1 aggregate outcomes.  All 13 primary
+gates in the corrective archive pass.  The maximum three-way budget gap is
+0. The remaining maximum audit residuals are
+\begin{align*}
+\text{intrinsic response} &= 5.2958809290937725\times 10^{-17},\\
+\text{ideal-multiplier change} &= 7.850462293418876\times 10^{-17},\\
+\text{random normal component} &= 1.265777190428121\times 10^{-15}.
+\end{align*}
+
+\begin{table}[h]
+\centering
+\caption{Primary aggregate held-out gains in the v0.9.4-r1 corrective archive.}
+\label{tab:aggregate}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lrrrr}
+\toprule
+Comparison & Mean gain & 95\% CI low & 95\% CI high & Record wins\\
+\midrule
+Intrinsic vs reference & 0.0004937962211018602 & 0.0002902978897001541 & 0.0006822119290361299 & 72/72\\
+Intrinsic vs random & 0.0003411545293638851 & 0.00023521176375243113 & 0.00045502493973362636 & 68/72\\
+Intrinsic vs SPSA & 0.00012279600467454457 & 0.00005996365059637254 & 0.00020092595128065157 & 72/72\\
+\bottomrule
+\end{tabular}
+}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{Frozen instances and exact-order success bins.}
+\label{tab:instances}
+\begin{tabular}{lrrrr}
+\toprule
+Instance & Order & Control qubits & Success bins & Ideal probability\\
+\midrule
+$N15,a2$ & 4 & 4 & 4, 12 & 0.500000000000000\\
+$N15,a7$ & 4 & 4 & 4, 12 & 0.500000000000000\\
+$N21,a2$ & 6 & 7 & 21, 107 & 0.228072894737454\\
+$N21,a5$ & 6 & 7 & 21, 107 & 0.228072894737454\\
+$N33,a2$ & 10 & 7 & 13, 115 & 0.175232715792459\\
+$N35,a2$ & 12 & 8 & 21, 107, 149, 235 & 0.228072894737451\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{Per-instance mean gains and win counts in r1.}
+\label{tab:wins}
+\begin{tabular}{lrrrrr}
+\toprule
+Instance & vs reference & vs random & vs SPSA & Random wins & SPSA wins\\
+\midrule
+$N15,a2$ & 0.000695540898 & 0.000357417952 & 0.000201403988 & 10/12 & 12/12\\
+$N15,a7$ & 0.000764201566 & 0.000291541463 & 0.000070793081 & 12/12 & 12/12\\
+$N21,a2$ & 0.000194208274 & 0.000230987431 & 0.000061399586 & 11/12 & 12/12\\
+$N21,a5$ & 0.000730337378 & 0.000577315629 & 0.000286392554 & 12/12 & 12/12\\
+$N33,a2$ & 0.000175745638 & 0.000185139622 & 0.000062518321 & 11/12 & 12/12\\
+$N35,a2$ & 0.000402743572 & 0.000404525079 & 0.000054268499 & 12/12 & 12/12\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{Primary gates in the r1 archive.}
+\label{tab:gates}
+\begin{tabular}{lr}
+\toprule
+Gate & Status\\
+\midrule
+Frozen instance family used & pass\\
+All multiplicative orders exact & pass\\
+All success-bin sets nonempty & pass\\
+Response rank five and tangent dimension four & pass\\
+Three-way budget exact & pass\\
+Intrinsic preserves declared response & pass\\
+Intrinsic preserves ideal multiplier & pass\\
+Random comparator is tangent & pass\\
+Reference aggregate confidence interval positive & pass\\
+Random aggregate confidence interval positive & pass\\
+SPSA aggregate confidence interval positive & pass\\
+Intrinsic beats random on majority of instances & pass\\
+Intrinsic beats SPSA on majority of instances & pass\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Interpretation And Boundaries}
+
+The result is a reproducible empirical separation inside a declared synthetic
+model.  It shows that exact-response fibres can contain task-relevant
+directions even when the ideal response is held fixed.  It does not show that
+the same directions exist in a native compiled circuit, that a hardware
+implementation would benefit, that fault-tolerant resources are reduced, that
+cryptographic-scale factoring becomes easier, or that Shor order finding has
+an improved asymptotic complexity.  The appropriate interpretation is
+navigability of a non-native exact-response fibre, not practical computational
+advantage.
+
+\section{Exploratory Geometry}
+
+The archived m3 PDF contained a quantitative Section VI, but the editable
+source and complete generation chain for those diagnostics are unavailable.
+This reconstructed m4 source therefore removes the unverified Hessian,
+256-sample, infidelity-proxy, and preconditioning-ablation numerical claims.
+Future work should redeposit executable scripts, inputs, outputs, and hashes
+before using such geometric diagnostics as quantitative evidence.
+
+\appendix
+
+\section{Primary Gates}
+
+The r1 archive reports the following primary checks as true:
+frozen instance family used; all multiplicative orders exact; all success-bin
+sets nonempty; response rank five and tangent dimension four; three-way budget
+exact; intrinsic declared response preserved; intrinsic ideal multiplier
+preserved; random comparator tangent; aggregate intrinsic-vs-reference
+confidence interval positive; aggregate intrinsic-vs-random confidence
+interval positive; aggregate intrinsic-vs-SPSA confidence interval positive;
+intrinsic beats random on a majority of instances; and intrinsic beats SPSA on
+a majority of instances.
+
+\section{Reproducibility Correction}
+
+The v0.9.4-r1 archive retains the original v0.9.4 driver, protocol, result,
+stdout, tag, and release unchanged, and adds a corrective driver, explicit
+tangent basis, environment/protocol files, and a full 72-record result JSON.
+The correction does not attempt to recreate the undeclared v0.9.4 SPSA
+coordinate basis.  It instead defines the SPSA coordinates explicitly and
+reruns the full 72-record benchmark.  The r1 SPSA values are therefore not a
+bitwise reproduction of the old SPSA archive values.
+
+\section{Code And Data Availability}
+
+Code, the frozen v0.9.4 protocol, complete per-meta records, reference stdout,
+integrity hashes, and r1 corrective artifacts are available in the
+\texttt{geometric-flow-qc} repository.  The frozen computational tag is
+\texttt{shor-multinstance-fibre-v0.9.4}.  The archived m3 PDF has SHA-256
+\nolinkurl{a258dc5f0ad8b7103794d7af5b8c98d8c56f5e7131eccf1dddc6aad51273913f}.
+The r1 result JSON has SHA-256
+\nolinkurl{3470ede84497391c8a99241db57aead6b0a642ee77a97ff27fed927e41f8aabf}.
+
+\small
+\begin{thebibliography}{99}
+\bibitem{shor1997}
+P. W. Shor, Polynomial-time algorithms for prime factorization and discrete
+logarithms on a quantum computer, SIAM Journal on Computing 26, 1484--1509
+(1997).
+\bibitem{kitaev1995}
+A. Y. Kitaev, Quantum measurements and the Abelian stabilizer problem,
+arXiv:quant-ph/9511026 (1995).
+\bibitem{nielsenchuang}
+M. A. Nielsen and I. L. Chuang, Quantum Computation and Quantum Information,
+Cambridge University Press (2010).
+\bibitem{rabitz1992}
+H. Rabitz, M. Hsieh, and C. Rosenthal, Quantum optimally controlled transition
+landscapes, Science 303, 1998--2001 (2004).
+\bibitem{chakrabarti2007}
+R. Chakrabarti and H. Rabitz, Quantum control landscapes, International
+Reviews in Physical Chemistry 26, 671--735 (2007).
+\bibitem{khaneja2005}
+N. Khaneja, T. Reiss, C. Kehlet, T. Schulte-Herbruggen, and S. J. Glaser,
+Optimal control of coupled spin dynamics: design of NMR pulse sequences by
+gradient ascent algorithms, Journal of Magnetic Resonance 172, 296--305
+(2005).
+\bibitem{spall1992}
+J. C. Spall, Multivariate stochastic approximation using a simultaneous
+perturbation gradient approximation, IEEE Transactions on Automatic Control
+37, 332--341 (1992).
+\bibitem{benenti2001}
+G. Benenti and G. Strini, Computing the distance between quantum channels,
+Journal of Physics B 43, 215508 (2010).
+\end{thebibliography}
+\normalsize
+
+\end{document}
