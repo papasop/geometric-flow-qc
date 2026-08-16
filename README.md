@@ -1,40 +1,38 @@
-# Intrinsic Shor Task-Fibre Preflight v0.9.3
+# Multi-Instance Shor Task-Fibre Audit v0.9.4
 
-This repository freezes a prospective numerical audit of response-fibre
-optimization at the Shor order-finding task level.
+This repository freezes a prospective multi-instance numerical audit of
+intrinsic response-fibre navigation at the Shor order-finding task level.
 
 ## Frozen scope
 
-- Instance: `N=15`, `a=2`, exact order `r=4`
-- Simulator: exact state-vector order-finding distribution, including inverse
-  QFT measurement probabilities
-- Noise: frozen synthetic coherent and dephasing model
-- Declared response: ideal modular-multiplication response
-- Fibre dimension: four
-- Primary task metric: probability that continued-fraction post-processing
-  returns the exact order
-- Repetitions: 12 independently seeded meta-experiments
+- Instances: `(15,2)`, `(15,7)`, `(21,2)`, `(21,5)`, `(33,2)`, `(35,2)`
+- Exact orders: `4`, `4`, `6`, `6`, `10`, `12`
+- Simulator: exact phase-estimation distributions with continued-fraction
+  exact-order recovery
+- Implementation: shared synthetic nine-parameter ansatz
+- Declared response: rank five; exact fibre dimension four
+- Noise: frozen synthetic coherent/dephasing laws with a shifted held-out law
+- Repetitions: 12 meta-seeds per instance, 72 records in total
+- Training/held-out split: 5 training and 8 shifted held-out seeds per record
 - Comparators: unchanged reference, basis-invariant random search, and SPSA
-- Budget: exactly 5,520 objective evaluations for every compared method in
-  every meta-experiment
+- Budget: exactly 5,520 charged units per method per record
+- Inference: equal-instance-weight hierarchical paired bootstrap
 
 This is not a native-gate hardware experiment, a fault-tolerance result, a
-cryptographic-scale factorization, or evidence of asymptotic speedup.
+cryptographic-scale factorization, a universal Shor optimizer, or evidence of
+asymptotic speedup.
 
 ## Frozen primary result
 
-The intrinsic Euclidean fibre flow preserves the ideal multiplier and improves
-held-out exact-order recovery relative to:
-
-| Comparison | Mean paired gain | 95% bootstrap CI | Wins | Two-sided sign test |
+| Comparison | Equal-instance mean gain | Hierarchical 95% CI | Record wins | Positive instances |
 |---|---:|---:|---:|---:|
-| unchanged reference | 0.000663114 | [0.000589428, 0.000730952] | -- | -- |
-| basis-invariant random search | 0.000227786 | [0.0000736565, 0.000448007] | 11/12 | 0.00634766 |
-| SPSA | 0.000159149 | [0.000120597, 0.000192322] | 11/12 | 0.00634766 |
+| intrinsic vs reference | 0.000493796 | [0.000290298, 0.000682212] | 72/72 | 6/6 |
+| intrinsic vs random | 0.000341155 | [0.000235212, 0.000455025] | 68/72 | 6/6 |
+| intrinsic vs SPSA | 0.000120071 | [0.0000599292, 0.000193319] | 72/72 | 6/6 |
 
-All preregistered primary checks pass. The additional tangent, hybrid,
-exact-fibre, Hessian-preconditioned, and drifted-flow comparisons are
-exploratory ablations and are explicitly non-blocking.
+All preregistered primary checks pass. The maximum three-way budget gap is
+zero, the maximum intrinsic response residual is `2.66e-16`, and the maximum
+ideal-multiplier change is `4.79e-16`.
 
 ## Reproduce
 
@@ -42,14 +40,14 @@ Python 3.10+ and NumPy are sufficient.
 
 ```bash
 python -m pip install -r requirements.txt
-python shor_order_finding_response_fibre_v0_9_3.py \
-  --json-out shor_order_finding_v0_9_3_result_reproduced.json
+python shor_order_finding_multinstance_fibre_v0_9_4.py \
+  --json-out shor_multinstance_fibre_v0_9_4_result_reproduced.json
 ```
 
-The default run uses the frozen protocol. Runtime is normally under a few
-minutes on a laptop CPU. Notebook-injected arguments such as `-f` are ignored.
+The default arguments are the frozen formal protocol. Notebook-injected
+arguments such as `-f` are ignored.
 
-To verify the deposited files:
+Verify deposited files with:
 
 ```bash
 sha256sum -c SHA256SUMS
@@ -57,22 +55,21 @@ sha256sum -c SHA256SUMS
 
 ## Files
 
-- `shor_order_finding_response_fibre_v0_9_3.py`: frozen executable source
-- `frozen_protocol.json`: concise prospective protocol and claim boundary
-- `shor_order_finding_v0_9_3_result.json`: machine-readable reference result
-- `shor_order_finding_v0_9_3_stdout.txt`: complete reference stdout
+- `shor_order_finding_multinstance_fibre_v0_9_4.py`: frozen executable source
+- `frozen_protocol.json`: machine-readable prospective protocol and boundaries
+- `shor_multinstance_fibre_v0_9_4_result.json`: complete formal result
+- `shor_multinstance_fibre_v0_9_4_stdout.txt`: complete formal stdout
 - `requirements.txt`: minimal dependency pin
 - `CITATION.cff`: citation metadata
 - `SHA256SUMS`: integrity manifest
 
-## Scientific claim boundary
+## Supported statement
 
-The supported statement is restricted to this frozen synthetic model:
+Within the declared shared synthetic model family, intrinsic Euclidean ascent
+along a four-dimensional exact ideal-response fibre has positive mean advantage
+over the unchanged reference, equal-budget basis-invariant random search, and
+equal-budget SPSA on every frozen instance. All three equal-instance-weight
+hierarchical bootstrap intervals are strictly positive.
 
-> For the specified `N=15, a=2` state-vector order-finding model, intrinsic
-> motion along an exact ideal-response fibre improves shifted held-out
-> exact-order recovery over equal-budget basis-invariant random search and
-> SPSA while preserving the ideal modular multiplier.
-
-No claim is made about full Shor acceleration, computational complexity,
-hardware advantage, universal noise robustness, or scalability.
+No claim is made about native compiled circuits, hardware advantage,
+fault-tolerant resources, factoring complexity, or scalability.
