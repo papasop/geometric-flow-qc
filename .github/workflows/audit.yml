@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  smoke:
+  reproducibility:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -14,20 +14,24 @@ jobs:
         with:
           python-version: "3.11"
       - name: Install dependencies
-        run: python -m pip install -r requirements.txt
-      - name: Compile driver
-        run: python -m py_compile shor_order_finding_multinstance_fibre_v0_9_4.py
-      - name: Compile disclosure tools
         run: |
-          python -m py_compile tools/report_v0_9_4_disclosure.py
-          python -m py_compile tools/verify_frozen_v0_9_4.py
+          python -m pip install --upgrade pip
+          python -m pip install numpy==2.0.2
+          python - <<'PY'
+          import numpy
+          assert numpy.__version__ == "2.0.2", numpy.__version__
+          PY
+      - name: Verify frozen v0.9.4 artifacts
+        run: python3 tools/verify_frozen_v0_9_4.py
+      - name: Verify v0.9.4-r1 corrective archive
+        run: python3 tools/verify_r1_reproducibility.py
+      - name: Verify reconstructed m4 manuscript numbers
+        run: python3 tools/verify_m4_manuscript_numbers.py
       - name: Verify repository manifest
         run: sha256sum -c SHA256SUMS
       - name: Verify manuscript manifest
         run: sha256sum -c SHA256SUMS_MANUSCRIPT_v0.9.4-m3.txt
-      - name: Verify frozen artifacts
-        run: python tools/verify_frozen_v0_9_4.py
-      - name: Run read-only disclosure report
+      - name: Compile frozen and r1 drivers
         run: |
-          python tools/report_v0_9_4_disclosure.py > /tmp/v094_disclosure.json
-          python -m json.tool /tmp/v094_disclosure.json > /dev/null
+          python3 -m py_compile shor_order_finding_multinstance_fibre_v0_9_4.py
+          python3 -m py_compile shor_order_finding_multinstance_fibre_v0_9_4_r1.py
