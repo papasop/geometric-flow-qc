@@ -165,6 +165,29 @@ python tools/verify_r1_reproducibility.py
 python tools/verify_m4_manuscript_numbers.py
 ```
 
+### Clean external one-click audit
+
+From any macOS or Linux directory with Python 3.10+ and Git installed, run:
+
+```bash
+python3 <(curl -fsSL https://raw.githubusercontent.com/papasop/geometric-flow-qc/main/tools/external_one_click_test.py)
+```
+
+The script clones the frozen `shor-multinstance-fibre-v0.9.4-r1` tag into a
+temporary directory, creates an isolated virtual environment, installs the
+pinned NumPy dependency, and runs the frozen, r1, manuscript-number, checksum,
+syntax, and disclosure checks. It is read-only and does not rerun the 72-record
+optimization. A successful run ends with
+`PASS: clean external audit completed` and prints the verified commit.
+
+For the more conservative two-command form, inspect the script first:
+
+```bash
+curl -fsSLo external_one_click_test.py \
+  https://raw.githubusercontent.com/papasop/geometric-flow-qc/main/tools/external_one_click_test.py
+python3 external_one_click_test.py
+```
+
 ## Files
 
 - `shor_order_finding_multinstance_fibre_v0_9_4.py`: frozen executable source
@@ -172,6 +195,7 @@ python tools/verify_m4_manuscript_numbers.py
 - `shor_multinstance_fibre_v0_9_4_result.json`: complete formal result
 - `shor_multinstance_fibre_v0_9_4_stdout.txt`: complete formal stdout
 - `requirements.txt`: minimal dependency pin
+- `tools/external_one_click_test.py`: clean-checkout external audit entry point
 - `CITATION.cff`: citation metadata
 - `SHA256SUMS`: integrity manifest
 - `docs/manuscript/reconstructed-v0.9.4-m4/`: reconstructed m4 manuscript
